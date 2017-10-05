@@ -24,20 +24,30 @@ void str_copia (char *s, char *d)
 
 void str_concatena (char *s, char *d)
 {
-	int j = str_tamanho(d) + 1;
-	int i = 0;
-	while(s[i] != '\0')
+	int tam = str_tamanho(s);
+	tam += str_tamanho(d);
+	char *V = (char*)malloc(tam*sizeof(char));
+
+	int S = str_tamanho(s);
+	int D = str_tamanho(d);
+	int i = 0, j = 0;
+
+	while(i<S)
 	{
-		d[j] = s[i];
+ 		*(V+i) = s[i];
+ 		i++;
+	}
+	while(j<D)
+	{
+		*(V+S+j) = d[j];
 		j++;
-		i++;
 	}
 }
 
 int main(int argc, char const *argv[])
 {
-	char t1[10] = "0123456789";
-	printf("%s\n", t1);
+	char t1[5] = "12345";
+	printf("%s \n", t1);
 
 	int tamanho1 = str_tamanho(t1);
 	printf("%d\n", tamanho1);
