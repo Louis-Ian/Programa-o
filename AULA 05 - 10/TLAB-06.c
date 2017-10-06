@@ -54,11 +54,12 @@ int main(int argc, char const *argv[])
 	t1 = "12345";
 
 	char *t2 = (char*)malloc(7*sizeof(char));
-	t2 = "6789011";
+	t2 = "67890";
 
 	char *t3 = (char*)malloc(8*sizeof(char));
 	int tamanho1 = str_tamanho(t3);
 	printf("tam: %d\n", tamanho1);
+	
 	printf("t1: %s\n", t1);
 	printf("t2: %s\n", t2);
 	printf("t3: %s\n\n", t3);
