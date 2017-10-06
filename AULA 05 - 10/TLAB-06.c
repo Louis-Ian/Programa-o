@@ -74,14 +74,29 @@ void str_concatena (char *s, char *d)
 
 	printf("t1: %s\n", t1);
 	printf("t2: %s\n", t2);
-	printf("t3: %s\n\n", t3);	*/
+	printf("t3: %s\n\n", t3);
+	*/
+
+/*void switch_Nos_extensos(char *N)
+{
+	if(N[0])
+}*/
 
 int main(int argc, char const *argv[])
 {
-	FILE *fArquivo = fopen("C://Intro_T-06.c","r");
+	//FILE *fArquivo = fopen("C://Intro_T-06.c","r");
 	//char  = argv[1];
-	fprintf(fArquivo, "\n");
-	fclose(fArquivo);
+	//fprintf(fArquivo, "\n");
+	//fclose(fArquivo);
+//	char entrada[3];
+//	printf("Insira um número de 1 à 999: ");
+//	scanf("%s", entrada);
+//	entrada = strtol(entrada,,1);
+//
+//	while(entrada > 0 && entrada < 1000)
+//	{
+//
+//	}
 
 	return 0;
 }
