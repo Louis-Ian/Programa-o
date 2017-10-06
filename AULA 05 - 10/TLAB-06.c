@@ -48,8 +48,8 @@ void str_concatena (char *s, char *d)
 	str_copia(V,d);
 }
 
-int main(int argc, char const *argv[])
-{
+/*			*** Teste ***
+	
 	char *t1 = (char*)malloc(5*sizeof(char));
 	t1 = "12345";
 
@@ -74,7 +74,14 @@ int main(int argc, char const *argv[])
 
 	printf("t1: %s\n", t1);
 	printf("t2: %s\n", t2);
-	printf("t3: %s\n\n", t3);
+	printf("t3: %s\n\n", t3);	*/
+
+int main(int argc, char const *argv[])
+{
+	FILE *fArquivo = fopen("C://Intro_T-06.c","r");
+	//char  = argv[1];
+	fprintf(fArquivo, "\n");
+	fclose(fArquivo);
 
 	return 0;
 }
