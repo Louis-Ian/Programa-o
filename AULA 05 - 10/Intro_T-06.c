@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
-***	INTRODUÇÃO À STRING ***
-*/
+/*	***	INTRODUÇÃO À STRING ***		*/
 
 int main(int argc, char const *argv[])
 {
