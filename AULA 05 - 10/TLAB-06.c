@@ -8,7 +8,6 @@ int str_tamanho (char *s)
 	{
 		tam++;
 	}
-
 	return tam;
 }
 
