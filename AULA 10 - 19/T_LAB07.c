@@ -13,23 +13,61 @@ typedef struct agenda{
 	char nome[MAXNOME];
 } Agenda;
 
-void inserir_numero( Agenda agenda, long int numero){
-
+void inserir_numero( Agenda agenda, long int numeroInsert = 0){
+	if (numeroInsert == 0){
+		long int numeroScan;
+		scanf("%ld" , &numeroScan);
+		agenda.numero = numeroScan;
+	}
+	else
+		agenda.numero = numeroInsert;
 }
 
-void inserir_ddd( Agenda agenda, int ddd){
-
+void inserir_ddd( Agenda agenda, int dddInsert){
+	if (!dddInsert){
+		int dddScan;
+		scanf("%d" , &dddScan);
+		agenda.ddd = dddScan;
+	}
+	else
+		agenda.ddd = dddInsert;
 }
 
-void inserir_matricula( Agenda agenda, long int matricula){
+void inserir_matricula( Agenda agenda, long int matriculaInsert){
+	if (!matriculaInsert){
+		long int matriculaScan;
+		scanf("%ld" , &matriculaScan);
+		agenda.matricula = matriculaScan;
+	}
+	else
+		agenda.matricula = matriculaInsert;
+}
 
+void inserir_tipo( Agenda agenda, char tipoInsert){
+	if (!tipoInsert){
+		char tipoScan;
+		scanf("%c" , &tipoScan);
+		agenda.tipo = tipoScan;
+	}
+	else
+		agenda.tipo = tipoInsert;
+}
+
+void inserir_nome( Agenda agenda, char nomeInsert){
+	if (!nomeInsert){
+		char nomeScan[MAXNOME];
+		scanf("%s",nomeScan);
+		*agenda.nome = nomeScan;
+	}
+	else
+		*agenda.nome = nomeInsert;
 }
 
 int main(int argc, char const *argv[]){
 	
 
 	Agenda x;
-	x.numero = 84255686;
+	inserir_numero(x);
 
 	printf("%ld \n", x.numero);
 
