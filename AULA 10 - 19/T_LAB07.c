@@ -5,71 +5,44 @@
 #define MAXNOME 100
 #define MAXREGISTROS 1000
 
-typedef struct agenda{
-	long int numero;
+typedef struct info{
+	char nome[100];
 	long int matricula;
+	long int numero;
 	int ddd;
-	char tipo;
-	char nome[MAXNOME];
-} Agenda;
+	char tipo[2];
+} Info;
 
-void inserir_numero( Agenda agenda, long int numeroInsert = -1){
-	if (numeroInsert == -1){
-		long int numeroScan;
-		scanf("%ld" , &numeroScan);
-		agenda.numero = numeroScan;
-	}
-	else
-		agenda.numero = numeroInsert;
+void buscar_nome(Info *agenda){
+
 }
 
-void inserir_ddd( Agenda agenda, int dddInsert){
-	if (!dddInsert){
-		int dddScan;
-		scanf("%d" , &dddScan);
-		agenda.ddd = dddScan;
-	}
-	else
-		agenda.ddd = dddInsert;
+void inserir(Info *agenda){
+	Info insert;
+	printf("Insira o nome: \n");
+	scanf("%[^\n]", agenda->nome);
+	printf("Insira a matrícula: \n");
+	scanf("%ld", &agenda->matricula);
+	printf("Insira o DDD: \n");
+	scanf("%d", &agenda->ddd);
+	printf("Insira o número: \n");
+	scanf("%ld", &agenda->numero);
+	printf("Insira o tipo: \n");
+	scanf("%s", agenda->tipo);
 }
 
-void inserir_matricula( Agenda agenda, long int matriculaInsert){
-	if (!matriculaInsert){
-		long int matriculaScan;
-		scanf("%ld" , &matriculaScan);
-		agenda.matricula = matriculaScan;
+char menu(Info *agenda){
+	if (agenda->tipo == "A")
+	{
+		return "A";
 	}
-	else
-		agenda.matricula = matriculaInsert;
-}
-
-void inserir_tipo( Agenda agenda, char tipoInsert){
-	if (!tipoInsert){
-		char tipoScan;
-		scanf("%c" , &tipoScan);
-		agenda.tipo = tipoScan;
-	}
-	else
-		agenda.tipo = tipoInsert;
-}
-
-void inserir_nome( Agenda agenda, char nomeInsert){
-	if (!nomeInsert){
-		char nomeScan[MAXNOME];
-		scanf("%s",nomeScan);
-		*agenda.nome = nomeScan;
-	}
-	else
-		*agenda.nome = nomeInsert;
 }
 
 int main(int argc, char const *argv[]){
 	
-
-	Agenda x;
-	inserir_numero(x);
-
-	printf("%ld \n", x.numero);
-
+	Info teste;
+	inserir(&teste);
+	char vamos[1];
+	vamos = menu(&teste);
 	return 0;
 }
