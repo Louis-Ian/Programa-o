@@ -13,8 +13,8 @@ typedef struct agenda{
 	char nome[MAXNOME];
 } Agenda;
 
-void inserir_numero( Agenda agenda, long int numeroInsert = 0){
-	if (numeroInsert == 0){
+void inserir_numero( Agenda agenda, long int numeroInsert = -1){
+	if (numeroInsert == -1){
 		long int numeroScan;
 		scanf("%ld" , &numeroScan);
 		agenda.numero = numeroScan;
