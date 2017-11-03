@@ -65,7 +65,7 @@ void inserir_novo(Agenda **lista){
 	
 //	printf("Insira o tipo: \n");
 //	scanf("%s", tipo);
-//	strcpy(tipo, &(*lista)[posicao].tipo);
+//	strcpy(&(*lista)[posicao].tipo, nome);
 }
 
 void apagar_registro(Agenda **lista){
@@ -73,27 +73,21 @@ void apagar_registro(Agenda **lista){
 }
 
 void listar_agenda(Agenda **lista){
-
+	for(int i = 0; lista[i]->ddd >= 0; ++i){
+		printf("%s - (%d)%ld\n", lista[i]->nome, lista[i]->ddd, lista[i]->numero);
+	}
 }
-
-//void inicializar_agenda(Agenda **lista){
-//	for(int i = 0; i < MAXREGISTRO; ++i){
-//		&(*lista+i)->ddd = 0;
-//		&(*lista)[i].ddd = 0;
-//	}
-//}
 
 int main(int argc, char const *argv[])
 {
 	Agenda *teste1 = malloc(MAXREGISTRO*sizeof(Agenda));
 	
 	for(int i = 0; i < MAXREGISTRO; ++i){
-//		&(*lista+i)->ddd = 0;
-		(*teste1)[i].ddd = 0;
+		teste1[i].ddd = -1;
 	}
 
 	Agenda teste2;
-	strcpy(teste2.nome,"nome de teste");
+	strcpy(teste2.nome,"Nome de teste");
 	teste2.numero = 12341234;
 	teste2.matricula = 989898;
 	teste2.ddd = 567;
@@ -101,20 +95,31 @@ int main(int argc, char const *argv[])
 
 	teste1[0] = teste2;
 
-	printf("TESTE: %s - ", teste2.nome);
-	printf("(%d) ", teste2.ddd);
-	printf("%ld ", teste2.numero);
-	printf("M-%ld", teste2.matricula);
-	printf(" %c\n", teste2.tipo);
+	strcpy(teste2.nome,"Nome de teste 2");
+	teste2.numero = 90456456;
+	teste2.matricula = 212121;
+	teste2.ddd = 777;
+	teste2.tipo = 'T';
 
-	buscar_nome(&teste1);
-	inserir_novo(&teste1);
+	teste1[1] = teste2;
 
-	printf("TESTE: %s - ", teste1[1].nome);
-	printf("(%d) ", teste1[1].ddd);
-	printf("%ld ", teste1[1].numero);
-	printf("M-%ld", teste1[1].matricula);
-	printf(" %c\n", teste1[1].tipo);
+//	printf("TESTE: %s - ", teste2.nome);
+//	printf("(%d) ", teste2.ddd);
+//	printf("%ld ", teste2.numero);
+//	printf("M-%ld", teste2.matricula);
+//	printf(" %c\n", teste2.tipo);
+//	buscar_nome(&teste1);
+	
+	listar_agenda(&teste1);
+//	inserir_novo(&teste1);
+
+//	printf("TESTE: %s - ", teste1[1].nome);
+//	printf("(%d) ", teste1[1].ddd);
+//	printf("%ld ", teste1[1].numero);
+//	printf("M-%ld", teste1[1].matricula);
+//	printf(" %c\n", teste1[1].tipo);
+
+//	listar_agenda(&teste1);
 
 	return 0;
 }
