@@ -13,7 +13,7 @@ typedef struct agenda{
 	long int matricula;
 	long int numero;
 	int ddd;
-	char tipo;
+	char tipo[2];
 } Agenda;
 
 void buscar_nome(Agenda **lista){
@@ -23,7 +23,8 @@ void buscar_nome(Agenda **lista){
 	int comparador;
 
 	printf("Insira o nome buscado: ");
-	scanf("%[^\n]", buscado);
+	//scanf("%[^\n]", buscado);
+	gets(buscado);
 
 	for(int i = 0; (*lista)[i].ddd > 0; ++i){
 		comparador = strcmp(buscado, (*lista)[i].nome);
@@ -34,12 +35,13 @@ void buscar_nome(Agenda **lista){
 	}
 
 	if(resultado == TRUE){
-		printf("%s - (%d)%ld\n", buscado, (*lista)[posicao].ddd, (*lista)[posicao].numero);
+		printf("RESULTADO: %s - (%d)%ld\n", buscado, (*lista)[posicao].ddd, (*lista)[posicao].numero);
 	}
 
 }
 
 void inserir_novo(Agenda **lista){
+/*
 	int posicao;
 	char tipo[1];
 	char nome[MAXNOME];
@@ -50,9 +52,9 @@ void inserir_novo(Agenda **lista){
 			break;
 		}
 
-//	printf("Insira o nome: \n");
-//	scanf("%[^\n]",nome);
-//	strcpy(nome, &(*lista)[posicao].nome);
+	printf("Insira o nome: \n");
+	scanf("%[^\n]",nome);
+	strcpy(nome, &(*lista)[posicao].nome);
 
 	printf("Insira a matrícula: \n");
 	scanf("%ld", &(*lista)[posicao].matricula);
@@ -63,9 +65,10 @@ void inserir_novo(Agenda **lista){
 	printf("Insira o número: \n");
 	scanf("%ld", &(*lista)[posicao].numero);
 	
-//	printf("Insira o tipo: \n");
-//	scanf("%s", tipo);
-//	strcpy(&(*lista)[posicao].tipo, nome);
+ //	printf("Insira o tipo: \n");
+ //	scanf("%s", tipo);
+ //	strcpy(&(*lista)[posicao].tipo, nome);
+*/
 }
 
 void apagar_registro(Agenda **lista){
@@ -73,17 +76,19 @@ void apagar_registro(Agenda **lista){
 }
 
 void listar_agenda(Agenda **lista){
-	for(int i = 0; lista[i]->ddd >= 0; ++i){
-		printf("%s - (%d)%ld\n", lista[i]->nome, lista[i]->ddd, lista[i]->numero);
+	for(int i = 0; i <= MAXREGISTRO; i++){
+		if((*lista)[i].ddd != 0){
+			printf("%s (%d)-%ld\n", (*lista)[i].nome,(*lista)[i].ddd,(*lista)[i].numero);
+		}
 	}
 }
 
 int main(int argc, char const *argv[])
 {
-	Agenda *teste1 = malloc(MAXREGISTRO*sizeof(Agenda));
+	Agenda *teste1 = (Agenda*)malloc(MAXREGISTRO*sizeof(Agenda));
 	
-	for(int i = 0; i < MAXREGISTRO; ++i){
-		teste1[i].ddd = -1;
+	for(int i = 0; i <= MAXREGISTRO; ++i){
+		teste1[i].ddd = 0;
 	}
 
 	Agenda teste2;
@@ -91,35 +96,40 @@ int main(int argc, char const *argv[])
 	teste2.numero = 12341234;
 	teste2.matricula = 989898;
 	teste2.ddd = 567;
-	teste2.tipo = 'C';
-
+	strcpy(teste2.tipo,"c");
+	
+	printf("TESTE: %s - ", teste2.nome);
+	printf("(%d) ", teste2.ddd);
+	printf("%ld ", teste2.numero);
+	printf("M-%ld", teste2.matricula);
+	printf(" %s\n", teste2.tipo);
+	
 	teste1[0] = teste2;
 
 	strcpy(teste2.nome,"Nome de teste 2");
 	teste2.numero = 90456456;
 	teste2.matricula = 212121;
 	teste2.ddd = 777;
-	teste2.tipo = 'T';
+	strcpy(teste2.tipo,"T");
 
 	teste1[1] = teste2;
 
-//	printf("TESTE: %s - ", teste2.nome);
-//	printf("(%d) ", teste2.ddd);
-//	printf("%ld ", teste2.numero);
-//	printf("M-%ld", teste2.matricula);
-//	printf(" %c\n", teste2.tipo);
-//	buscar_nome(&teste1);
+	printf("TESTE: %s - ", teste2.nome);
+	printf("(%d) ", teste2.ddd);
+	printf("%ld ", teste2.numero);
+	printf("M-%ld", teste2.matricula);
+	printf(" %s\n", teste2.tipo);
 	
-	listar_agenda(&teste1);
+//	listar_agenda(&teste1);
 //	inserir_novo(&teste1);
 
-//	printf("TESTE: %s - ", teste1[1].nome);
-//	printf("(%d) ", teste1[1].ddd);
-//	printf("%ld ", teste1[1].numero);
-//	printf("M-%ld", teste1[1].matricula);
-//	printf(" %c\n", teste1[1].tipo);
+//	printf("TESTE: %s - ", teste1[0].nome);
+//	printf("(%d) ", teste1[0].ddd);
+//	printf("%ld ", teste1[0].numero);
+//	printf("M-%ld", teste1[0].matricula);
+//	printf(" %s\n", teste1[0].tipo);
 
-//	listar_agenda(&teste1);
-
+	listar_agenda(&teste1);
+	buscar_nome(&teste1);
 	return 0;
 }
