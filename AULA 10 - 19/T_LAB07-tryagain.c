@@ -17,6 +17,7 @@ typedef struct agenda{
 } Agenda;
 
 void buscar_nome(Agenda **lista){
+	printf("\n");
 	char buscado[MAXNOME];
 	int resultado = FALSE;
 	int posicao = 0;
@@ -38,19 +39,20 @@ void buscar_nome(Agenda **lista){
 	}
 
 	if(resultado == TRUE)
-		printf("RESULTADO: %s - (%d)%ld\n", buscado, (*lista)[posicao].ddd, (*lista)[posicao].numero);
+		printf("RESULTADO: %s - (%d)%ld M-%ld %s\n\n", buscado, (*lista)[posicao].ddd, (*lista)[posicao].numero,(*lista)[posicao].matricula,(*lista)[posicao].tipo);
 	else
-		printf("RESULTADO: não encontrado.\n");
+		printf("RESULTADO: não encontrado.\n\n");
 }
 
 void inserir_novo(Agenda **lista){
+	printf("\n");
 	int brk = FALSE;
 	char tipo[1];
 	
 	for (int i = 0; i <= MAXREGISTRO && brk == FALSE; i++){
 		if ((*lista)[i].ddd == 0){
 			printf("Insira o nome: \n");
-			gets((*lista)[i].nome);
+			scanf("%s",(*lista)[i].nome);
 
 			printf("Insira a matrícula: \n");
 			scanf("%ld", &(*lista)[i].matricula);
@@ -78,6 +80,7 @@ void inserir_novo(Agenda **lista){
 }
 
 void apagar_registro(Agenda **lista){
+	printf("\n");
 	char busca[MAXNOME];
 	int resultado = FALSE, posicao = 0;
 	int comparador;
@@ -101,20 +104,28 @@ void apagar_registro(Agenda **lista){
 		strcpy((*lista)[posicao].tipo,"");
 		strcpy((*lista)[posicao].nome,"");
 		(*lista)[posicao].matricula = 0;
+		printf("\n");
 	}
 	else
-		printf("Nome não encontrado.\n");
+		printf("Nome não encontrado.\n\n");
 }
 
 void listar_agenda(Agenda **lista){
+	printf("\nLISTA:\n");
 	for(int i = 0; i <= MAXREGISTRO; i++)
 		if((*lista)[i].ddd > 0)
 			printf("%s (%d)-%ld M-%ld %s\n", (*lista)[i].nome,(*lista)[i].ddd,(*lista)[i].numero,(*lista)[i].matricula,(*lista)[i].tipo);
+		printf("\n");
 }
 
 int menu(Agenda **lista){
 	char Escolha[1];
-	printf("Escreva \n'I' para inserir um número,\n'B' para buscar um nome,\n'A' para apagar um nome salvo,\n'L' para listar os números salvos e\n'S' para sair:\n\n");
+	printf("Escreva: \n");
+	printf("'I' para inserir um número,\n");
+	printf("'B' para buscar um nome,\n");
+	printf("'A' para apagar um nome salvo,\n");
+	printf("'L' para listar os números salvos e\n");
+	printf("'S' para sair:\n");
 	scanf("%s",Escolha);
 
 	if(strcmp(Escolha,"A") == 0 || strcmp(Escolha,"a") == 0)
@@ -158,12 +169,12 @@ int main(int argc, char const *argv[]){
 	listaTeste[1] = teste2;
 
 
-int fim = FALSE;
+	int fim = FALSE;
 	while(fim != TRUE){
 		fim = menu(&listaTeste);
 	}
 
-/* TESTES: concluidos
+// TESTES: concluidos
 	listar_agenda(&listaTeste);
 	inserir_novo(&listaTeste);
 	//printf("TESTE: %s - ", listaTeste[0].nome);
@@ -171,11 +182,12 @@ int fim = FALSE;
 	//printf("%ld ", listaTeste[0].numero);
 	//printf("M-%ld", listaTeste[0].matricula);
 	//printf(" %s\n", listaTeste[0].tipo);
-
 	listar_agenda(&listaTeste);
-	//buscar_nome(&listaTeste);
+	buscar_nome(&listaTeste);
+	listar_agenda(&listaTeste);
 	apagar_registro(&listaTeste);
 	listar_agenda(&listaTeste);
-*/
+	menu(&listaTeste);
+
 	return 0;
 }
