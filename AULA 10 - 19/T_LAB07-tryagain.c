@@ -150,7 +150,14 @@ int main(int argc, char const *argv[]){
 	
 	for(int i = 0; i <= MAXREGISTRO; i++)
 		listaTeste[i].ddd = 0;
-	
+
+	int fim = FALSE;
+	while(fim != TRUE){
+		fim = menu(&listaTeste);
+	}
+
+/* TESTES: concluidos uhuu
+
 	Agenda teste2;
 	strcpy(teste2.nome,"Nome1");
 	teste2.numero = 12341234;
@@ -168,13 +175,6 @@ int main(int argc, char const *argv[]){
 
 	listaTeste[1] = teste2;
 
-
-	int fim = FALSE;
-	while(fim != TRUE){
-		fim = menu(&listaTeste);
-	}
-
-// TESTES: concluidos
 	listar_agenda(&listaTeste);
 	inserir_novo(&listaTeste);
 	//printf("TESTE: %s - ", listaTeste[0].nome);
@@ -188,6 +188,6 @@ int main(int argc, char const *argv[]){
 	apagar_registro(&listaTeste);
 	listar_agenda(&listaTeste);
 	menu(&listaTeste);
-
+*/
 	return 0;
 }
