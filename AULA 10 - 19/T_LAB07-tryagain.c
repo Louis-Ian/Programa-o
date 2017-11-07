@@ -53,6 +53,8 @@ void inserir_novo(Agenda **lista){
 		if ((*lista)[i].ddd == 0){
 			printf("Insira o nome: \n");
 			scanf("%s",(*lista)[i].nome);
+			//scanf("%[^\n]",(*lista)[i].nome);
+			//gets((*lista)[i].nome);
 
 			printf("Insira a matrícula: \n");
 			scanf("%ld", &(*lista)[i].matricula);
@@ -146,15 +148,83 @@ int menu(Agenda **lista){
 
 
 int main(int argc, char const *argv[]){
-	Agenda* listaTeste = (Agenda*)malloc(MAXREGISTRO*sizeof(Agenda));
 	
+	Agenda* listaTeste = (Agenda*)malloc(MAXREGISTRO*sizeof(Agenda));
+	if(listaTeste == NULL){
+		printf("ERRO de memória!\n");
+		return 1;
+	}
+
 	for(int i = 0; i <= MAXREGISTRO; i++)
 		listaTeste[i].ddd = 0;
 
-	int fim = FALSE;
-	while(fim != TRUE){
-		fim = menu(&listaTeste);
+	if(argc == 1){
+		int fim = FALSE;
+		while(fim != TRUE){
+			fim = menu(&listaTeste);
+		}
 	}
+
+	FILE *arquivo;
+	arquivo = fopen(argv[1], "rt");
+
+	if (arquivo == NULL)
+	{
+		printf("Falha ao abrir arquivo.\n");
+		return 1;
+	}
+
+	char c;
+	char *registro = (char*)malloc(7*sizeof(char));
+	char numAUX[10];
+	char matAUX[10];
+	char dddAUX[5];
+	int countM=0;
+	int countNome=0;
+	int countDdd=0;
+	int countNum=0;
+	int i = 0;
+
+	while((c=fgetc(arquivo)) != EOF){
+		if(c != '\n'){
+			*(matAUX+countM) = c;
+			countM++;
+		}
+		else{
+			listaTeste[i].matricula = atoi(matAUX);
+			if(c != '\n'){
+				*(listaTeste+countNome)[i].nome = c;
+				countNome++;
+			}
+			else{
+				if(c != '\n'){
+					*(dddAUX+countDdd) = c;
+					countDdd++;
+				}
+				else{
+					listaTeste[i].ddd = atoi(dddAUX);
+					if(c != '\n'){
+						*(numAUX+countNum) = c;
+						countNum++;
+					}
+					else{
+						listaTeste[i].numero = atoi(numAUX);
+						if (c != '\n')
+						{
+							*(listaTeste)[i].tipo = c;
+							countM = 0;
+							countNome = 0;
+							countDdd = 0;
+							countNum = 0;
+						}
+					}
+				}
+			}
+		}
+		i++;
+	}
+
+	fclose(arquivo);
 
 /* TESTES: concluidos uhuu
 
