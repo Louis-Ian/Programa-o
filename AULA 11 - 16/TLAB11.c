@@ -32,16 +32,21 @@ void inserir_inteiro (LCP **listaInput, int keyInput, int val){
 	(aux->next)->prev = aux;
 }
 
-/*void inserir_inteiro (LCP **listaInput, int keyInput, int val){
+void inserir_p_flutuante (LCP **listaInput, int keyInput, float val){
 	LCP (*aux) = (LCP*)malloc(sizeof(LCP));
 	aux = (*listaInput);
 	while(aux->key > keyInput)
 		aux = aux->next;
 
+	float *fInput = malloc(sizeof(float));
+	*fInput = val;
+
+	aux->info = fInput;
+	aux->type = (int*)1;
 	aux->prev = (aux->prev)->next;
 	(aux->prev)->next = aux;
 	(aux->next)->prev = aux;
-}*/
+}
 
 
 
@@ -49,9 +54,10 @@ int main(int argc, char const *argv[]){
 	LCP *lcp;
 	inicializar(&lcp);
 	inserir_inteiro(&lcp, 1, 10);
+	//inserir_p_flutuante(&lcp, 2, 3.1415);
 
 	printf("%d\n", (int)(*lcp).info);
-
+	printf("%f\n", (float*)(*lcp).info);
 
 	return 0;
 }
