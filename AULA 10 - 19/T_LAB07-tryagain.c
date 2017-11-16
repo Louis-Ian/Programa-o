@@ -130,16 +130,25 @@ int menu(Agenda **lista){
 	printf("'S' para sair:\n");
 	scanf("%s",Escolha);
 
-	if(strcmp(Escolha,"A") == 0 || strcmp(Escolha,"a") == 0)
+	if(strcmp(Escolha,"A") == 0 || strcmp(Escolha,"a") == 0){
 			apagar_registro(lista);
-	else if(strcmp(Escolha,"B") == 0 || strcmp(Escolha,"b") == 0)
+			return FALSE;
+		}
+	else if(strcmp(Escolha,"B") == 0 || strcmp(Escolha,"b") == 0){
 			buscar_nome(lista);
-	else if(strcmp(Escolha,"I") == 0 || strcmp(Escolha,"i") == 0)
+			return FALSE;
+		}
+	else if(strcmp(Escolha,"I") == 0 || strcmp(Escolha,"i") == 0){
 			inserir_novo(lista);
-	else if(strcmp(Escolha,"L") == 0 || strcmp(Escolha,"l") == 0)
+			return FALSE;
+		}
+	else if(strcmp(Escolha,"L") == 0 || strcmp(Escolha,"l") == 0){
 			listar_agenda(lista);
-	else if(strcmp(Escolha,"S") == 0 || strcmp(Escolha,"s") == 0)
+			return FALSE;
+		}
+	else if(strcmp(Escolha,"S") == 0 || strcmp(Escolha,"s") == 0){
 			return TRUE;
+		}
 	else{
 		printf("Insira uma opção válida.\n");
 		menu(lista);
@@ -150,6 +159,7 @@ int menu(Agenda **lista){
 int main(int argc, char const *argv[]){
 	
 	Agenda* listaTeste = (Agenda*)malloc(MAXREGISTRO*sizeof(Agenda));
+	
 	if(listaTeste == NULL){
 		printf("ERRO de memória!\n");
 		return 1;
@@ -158,9 +168,14 @@ int main(int argc, char const *argv[]){
 	for(int i = 0; i <= MAXREGISTRO; i++)
 		listaTeste[i].ddd = 0;
 
+	int fim = FALSE;
+	while(fim == FALSE)
+			fim = menu(&listaTeste);
+
+	/* Arquivo: fail.
 	if(argc == 1){
 		int fim = FALSE;
-		while(fim != TRUE){
+		while(fim == FALSE){
 			fim = menu(&listaTeste);
 		}
 	}
@@ -224,9 +239,9 @@ int main(int argc, char const *argv[]){
 		i++;
 	}
 
-	fclose(arquivo);
+	fclose(arquivo);*/
 
-/* TESTES: concluidos uhuu
+ /*TESTES: concluidos uhuu
 
 	Agenda teste2;
 	strcpy(teste2.nome,"Nome1");
@@ -257,7 +272,7 @@ int main(int argc, char const *argv[]){
 	listar_agenda(&listaTeste);
 	apagar_registro(&listaTeste);
 	listar_agenda(&listaTeste);
-	menu(&listaTeste);
-*/
+	menu(&listaTeste);*/
+
 	return 0;
 }
