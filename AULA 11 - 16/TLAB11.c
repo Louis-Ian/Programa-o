@@ -12,11 +12,11 @@ typedef struct listaCircularPolimorfica{
 	int type;
 } LCP;
 
-void inicializar(LCP **listaInput){
-	(*listaInput) = (LCP*)malloc(sizeof(LCP));
-	(*listaInput)->key = 0;
-	(*listaInput)->next = (*listaInput);
-	(*listaInput)->prev = (*listaInput);
+void inicializar(LCP *listaInput){
+	listaInput = (LCP*)malloc(sizeof(LCP));
+	listaInput->key = 0;
+	listaInput->next = listaInput;
+	listaInput->prev = listaInput;
 }
 
 void inserir_inteiro(LCP **listaInput, int keyInput, int val){
@@ -25,7 +25,7 @@ void inserir_inteiro(LCP **listaInput, int keyInput, int val){
 	while((aux->next)->key > keyInput)
 		aux = aux->next;
 
-	aux->info = (int*)val;
+	aux->info = &val;
 	aux->type = 0;
 	aux->prev = (aux->prev)->next;
 	(aux->prev)->next = aux;
@@ -56,7 +56,7 @@ void inserir_caracteres(LCP **listaInput, int keyInput, char val){
 	while(aux->key > keyInput)
 		aux = aux->next;
 
-	aux->info = (char*)val;
+	aux->info = &val;
 	aux->type = 2;
 	aux->prev = (aux->prev)->next;
 	(aux->prev)->next = aux;
@@ -141,15 +141,15 @@ void listar_elementos(LCP **listaInput){
 		if(aux->key == 0)
 			end++;
 	
-		tipo = obter_tipo(aux, i);
+		tipo = obter_tipo(&aux, i);
 		if(tipo == 0)
-			printf("%d\n", (int)aux->info);
+			printf("%d\n", aux->info);
 		else if(tipo == 1)
-			printf("%f\n", (float*)aux->info);
+			printf("%f\n", aux->info);
 		else if(tipo == 2)
-			printf("%c\n", (char)aux->info);
+			printf("%c\n", aux->info);
 		else if(tipo == 3)
-			printf("%s\n", (char*)aux->info);
+			printf("%s\n", aux->info);
 		else
 			printf("ahhhhhh\n");
 		i++;
@@ -158,15 +158,15 @@ void listar_elementos(LCP **listaInput){
 
 int main(int argc, char const *argv[]){
 	LCP *lcp;
-	inicializar(&lcp);
+	inicializar(lcp);
 
 	inserir_inteiro(&lcp, 1, 10);
-	inserir_inteiro(&lcp, 3, 12);
+	//inserir_inteiro(&lcp, 3, 12);
 	//inserir_inteiro(&lcp, 2, 11);
 
 	obter_tipo(&lcp, 1);
-	obter_inteiro(&lcp, 1);
-	obter_inteiro(&lcp, 3);
+	//obter_inteiro(&lcp, 1);
+	//obter_inteiro(&lcp, 3);
 	//obter_inteiro(&lcp, 3);
 
 	listar_elementos(&lcp);
