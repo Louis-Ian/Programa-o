@@ -34,17 +34,6 @@ void inserir_dados(Info **lista){
 	scanf("%s", (*lista)[posicao].tipo);
 }
 
-/*char* tipo_telefone(Info **lista){
-	char tipo[2];
-	tipo = (*lista)[i]->tipo;
-	if(tipo == 'c' || tipo == 'C')
-		return "celular";
-	else if(tipo == 't' || tipo == 'C')
-		return "telefone";
-	else
-		return "ERRO";
-}*/
-
 void buscar_nome(Info **lista){
 	char busca[MAXNOME];
 	printf("Insira o nome buscado: \n");
