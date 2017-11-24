@@ -120,7 +120,7 @@ void listar_agenda(Agenda **lista){
 
 int menu(Agenda **lista){
 	char Escolha[1];
-	printf("Escreva: \n");
+	printf("	----MENU---- \n");
 	printf("'I' para inserir um número,\n");
 	printf("'B' para buscar um nome,\n");
 	printf("'A' para apagar um nome salvo,\n");
