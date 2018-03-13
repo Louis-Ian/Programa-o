@@ -1,19 +1,33 @@
+legenda:
+	** terminado
+	*  incompleto
+	   não feito
+
 TO DO:
-	organizar jogadas do pc
-	criar menu
-	efeitos jangada
-	reiniciar partidas;
-	finalizar itoa;
+	corrigir efeito de destruir_sub no totalEmb
+	jogada extra depois do fim???
+	**mudar local/formato da mensagem
+	**efeitos jangada{
+		avisar que a jangada foi derrubada
+		*destruir um submarino {previsivel d+}
+	}
+	tudo3{
+		reiniciar partidas;
+		criar menu
+	}
+	apagar  vitoria em tudo.c
+	?finalizar itoa;
 
 	*trocar 0 e 1 por true e false
+	*repetir jogada apos acerto{
+		**repetir
+		coordenar ataque do pc
+	}
 
-	**usar acessar_coordena no começo de ataque_contra
 	**esconder mapaPC
 	**mostrar ultima jogada
 	**criar jogada pc
 
 EXTRA:
-	usar ASCII no printmap (char???)
-	contar embarcações restantes
-
-	
+	*usar ASCII no printmap (char???)
+	*contar embarcações restantes
