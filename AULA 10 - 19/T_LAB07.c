@@ -1,75 +1,147 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-#define MAXNOME 100
-#define MAXREGISTROS 1000
+#define MAXNOME 101
+#define MAXREGISTROS 1001
 
-typedef struct agenda{
-	long int numero;
-	long int matricula;
-	int ddd;
-	char tipo;
+typedef struct info{
 	char nome[MAXNOME];
-} Agenda;
+	long int matricula;
+	long int numero;
+	int ddd;
+	char tipo[2];
+} Info;
 
-void inserir_numero( Agenda agenda, long int numeroInsert = -1){
-	if (numeroInsert == -1){
-		long int numeroScan;
-		scanf("%ld" , &numeroScan);
-		agenda.numero = numeroScan;
-	}
-	else
-		agenda.numero = numeroInsert;
+void inserir_dados(Info **lista){
+	int posicao;
+	for (int i = 0; i > MAXREGISTROS; ++i)
+		if ((*lista)[i].ddd < 0){
+			posicao = i;
+			break;
+		}
+
+	printf("Insira o nome: \n");
+	scanf("%[^\n]", (*lista)[posicao].nome);
+	printf("Insira a matrícula: \n");
+	scanf("%ld", &(*lista)[posicao].matricula);
+	printf("Insira o DDD: \n");
+	scanf("%d", &(*lista)[posicao].ddd);
+	printf("Insira o número: \n");
+	scanf("%ld", &(*lista)[posicao].numero);
+	printf("Insira o tipo: \n");
+	scanf("%s", (*lista)[posicao].tipo);
 }
 
-void inserir_ddd( Agenda agenda, int dddInsert){
-	if (!dddInsert){
-		int dddScan;
-		scanf("%d" , &dddScan);
-		agenda.ddd = dddScan;
+void buscar_nome(Info **lista){
+	char busca[MAXNOME];
+	printf("Insira o nome buscado: \n");
+	scanf("%[^\n]", busca);
+	int resultado = false, posicao = 0;
+	int comparador;
+
+	for (int i = 0; (*lista)[i].ddd > 0; ++i)
+	{
+		comparador = strcmp(busca, (*lista)[i].nome);
+		if (comparador == 0){
+			posicao = i;
+			resultado = true;
+		}
+	}
+
+	if(resultado == true){
+		printf("%s - (%d)%ld\n", busca, (*lista)[posicao].ddd, (*lista)[posicao].numero);
+	}
+	else{
+		printf("Nome não encontrado.\n");
+	}
+}	
+
+void apagar_nome(Info **lista){
+	char busca[MAXNOME];
+	printf("Insira o nome a ser apagado: \n");
+	scanf("%[^\n]",busca);
+	int resultado = false, posicao = 0;
+	int comparador;
+
+	for(int i = 0; (*lista)[i].ddd > 0; ++i){
+		comparador = strcmp(busca, (*lista)[i].nome);
+		if(comparador == 0){
+			posicao = i;
+			resultado = true;
+		}
+	}
+
+	if(resultado == true){
+		(*lista)[posicao].numero = 0;
+		(*lista)[posicao].ddd = -1;
+		strcpy((*lista)[posicao].tipo,"");
+		strcpy((*lista)[posicao].nome,"");
+		(*lista)[posicao].matricula = 0;
 	}
 	else
-		agenda.ddd = dddInsert;
+		printf("Nome não encontrado.\n");
 }
 
-void inserir_matricula( Agenda agenda, long int matriculaInsert){
-	if (!matriculaInsert){
-		long int matriculaScan;
-		scanf("%ld" , &matriculaScan);
-		agenda.matricula = matriculaScan;
+void listar_todos(Info **lista){
+	int i = 0;
+	while(lista[i]->ddd > 0){
+		printf("%s - (%d)%ld\n", lista[i]->nome, lista[i]->ddd, lista[i]->numero);
+		i++;
 	}
-	else
-		agenda.matricula = matriculaInsert;
 }
 
-void inserir_tipo( Agenda agenda, char tipoInsert){
-	if (!tipoInsert){
-		char tipoScan;
-		scanf("%c" , &tipoScan);
-		agenda.tipo = tipoScan;
-	}
-	else
-		agenda.tipo = tipoInsert;
-}
+void menu(char Insert, Info **lista){
+	printf("Escreva 'I' para inserir um número,\n'B' para buscar um nome,\n'A' para apagar um nome salvo,\n'L' para listar os números salvos e\n'S' para sair:\n\n");
 
-void inserir_nome( Agenda agenda, char nomeInsert){
-	if (!nomeInsert){
-		char nomeScan[MAXNOME];
-		scanf("%s",nomeScan);
-		*agenda.nome = nomeScan;
-	}
-	else
-		*agenda.nome = nomeInsert;
+	switch(Insert){
+		case 'A':
+			apagar_nome(lista);
+		break;
+		case 'L':
+			listar_todos(lista);
+		break;
+		case 'I':
+			inserir_dados(lista);
+		break;
+		case 'B':
+			buscar_nome(lista);
+		break;
+		case 'a':
+			apagar_nome(lista);
+		break;
+		case 'l':
+			listar_todos(lista);
+		break;
+		case 'i':
+			inserir_dados(lista);
+		break;
+		case 'b':
+			buscar_nome(lista);
+		break;
+	};
 }
 
 int main(int argc, char const *argv[]){
 	
+	/*FILE *arquivo;
+	arquivo = fopen(argv[1], "rt");
 
-	Agenda x;
-	inserir_numero(x);
+	if(arquivo == NULL)
+	{
+		printf("Falha ao abrir arquivo.");
+		return 1;
+	}*/
 
-	printf("%ld \n", x.numero);
+	char *agenda[MAXREGISTROS];
+	printf("Bem vindo à sua agenda:\n");
+	char user;
+	scanf("%c", user);
+
+	while(user != 'S'){
+		menu(user,&agenda);
+	}
 
 	return 0;
 }
