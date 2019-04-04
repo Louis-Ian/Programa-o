@@ -1,31 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include "ABB.h"
+#include "ABB.h"
 
 typedef struct _abb{
 	struct _abb *esq, *dir;
 	int key;
 } abb;
 
-void inicializar_arvore(abb **a){
+void inicializar_arvore(abb *a){
 	abb *aux;
 	aux = (abb*)malloc(sizeof(abb));
 	aux->esq = NULL;
 	aux->dir = NULL;
 };
 
-int inserir_interativo(abb **a, int k){
+int inserir_interativo(abb *a, int k){
 	abb *aux = (abb*)malloc(sizeof(abb));
 	//while(()())
 };
 
-int inserir_recursivo(abb **a, int k){
+int inserir_recursivo(abb *a, int k){
 	abb *aux;
 
 	if((a->key) == NULL)
 		a = aux;
 	else{
-		*aux = (abb*)malloc(sizeof(abb));
+		aux = (abb*)malloc(sizeof(abb));
 		aux->esq = NULL;
 		aux->dir = NULL;
 		aux->key = k;
@@ -34,7 +34,7 @@ int inserir_recursivo(abb **a, int k){
 			if(a->key > k)
 				inserir_recursivo(a->esq,k);
 			else
-				inserir_recursivo(a>dir,k);
+				inserir_recursivo(a->dir,k);
 		else{
 			free(aux);
 			pritf("chave já existente.\n");
