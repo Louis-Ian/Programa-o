@@ -16,7 +16,7 @@ void semRetorno(){
 
 int main2(int argc, char **argv){
 	printf("Insira dois número para somar:\n");
-	scanf("%d %d", int a, int b)
+	scanf("%d %d", int a, int b);
 
 	return 0;
 }
